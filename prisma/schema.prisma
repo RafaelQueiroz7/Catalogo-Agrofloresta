@@ -11,3 +11,29 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model Especie {
+  // Identificadores
+  id                    String   @id @default(uuid())
+  slug                  String   @unique // Ex: "limao-taiti" para a URL
+  
+  // Textos solicitados pelo cliente
+  nomePopular           String
+  nomeCientifico        String
+  caracteristicas       String
+  localOrigem           String
+  localEncontrada       String
+  formaCultivo          String
+  propriedadesUsos      String
+  cuidadosRecomendacoes String
+
+  // Imagens (O símbolo '?' significa que é opcional) 
+  fotoRealUrl           String?
+  carimboBotanicoUrl    String?
+  aquarelaUrl           String?
+  mapaOrigemUrl         String?
+
+  // Controle de tempo (Boa prática de banco de dados)
+  criadoEm              DateTime @default(now())
+  atualizadoEm          DateTime @updatedAt
+}
