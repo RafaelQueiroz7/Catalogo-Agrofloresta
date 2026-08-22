@@ -35,6 +35,7 @@ export async function cadastrarEspecie(formData) {
     slug: slug, 
     nomePopular: nomePopular,
     nomeCientifico: nomeCientifico,
+    familia: formData.get('familia') || null,
     caracteristicas: formData.get('caracteristicas') || '',
     localOrigem: formData.get('localOrigem') || '',
     localEncontrada: formData.get('localEncontrada') || '',

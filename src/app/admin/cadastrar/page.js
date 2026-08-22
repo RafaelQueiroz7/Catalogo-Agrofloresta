@@ -4,6 +4,7 @@
 import { cadastrarEspecie } from '../../actions';
 import Link from 'next/link';
 import { useState } from 'react';
+import { unstable_rethrow } from 'next/navigation';
 
 export const runtime = 'nodejs';
 
@@ -30,6 +31,7 @@ export default function PainelCadastro() {
           setMensagemErro(null);
           await cadastrarEspecie(formData);
         } catch (error) {
+          unstable_rethrow(error);
           setMensagemErro(error.message);
         }
       }} className="space-y-8">
@@ -47,6 +49,10 @@ export default function PainelCadastro() {
             <div>
               <label htmlFor="nomeCientifico" className="block text-sm font-semibold text-stone-700 mb-1">Nome Científico *</label>
               <input type="text" id="nomeCientifico" name="nomeCientifico" required placeholder="Ex: Citrus x latifolia" className="w-full px-4 py-2 border border-stone-200 rounded-lg focus:ring-2 focus:ring-emerald-200 focus:border-emerald-500 italic transition" />
+            </div>
+            <div>
+              <label htmlFor="familia" className="block text-sm font-semibold text-stone-700 mb-1">🔬 Família Botânica</label>
+              <input type="text" id="familia" name="familia" placeholder="Ex: Rutaceae" className="w-full px-4 py-2 border border-stone-200 rounded-lg focus:ring-2 focus:ring-emerald-200 focus:border-emerald-500 transition" />
             </div>
           </div>
         </section>

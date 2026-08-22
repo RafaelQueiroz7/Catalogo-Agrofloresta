@@ -19,6 +19,7 @@ model Especie {
   // Textos solicitados pelo cliente
   nomePopular           String
   nomeCientifico        String
+  familia               String?
   caracteristicas       String
   localOrigem           String
   localEncontrada       String

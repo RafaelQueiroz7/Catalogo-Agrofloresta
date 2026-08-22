@@ -1,37 +1,15 @@
 import EspecieCard from "../components/EspecieCard";
+import { prisma } from "../server/db";
 
-// Dados fictícios temporários (Mock) até o banco de dados estar conectado
-const plantasFicticias = [
-  {
-    id: "1",
-    nomePopular: "Limão Taiti",
-    nomeCientifico: "Citrus x latifolia",
-    slug: "limao-taiti",
-    familia: "Rutaceae",
-    estrato: "Alto",
-    descricao: "Árvore frutífera de porte médio, excelente para consórcio em sistemas agroflorestais, exigindo boa incidência solar."
-  },
-  {
-    id: "2",
-    nomePopular: "Feijão-de-porco",
-    nomeCientifico: "Canavalia ensiformis",
-    slug: "feijao-de-porco",
-    familia: "Fabaceae",
-    estrato: "Rasteiro",
-    descricao: "Pioneira herbácea fantástica para adubação verde, fixação de nitrogênio no solo e supressão de plantas espontâneas."
-  },
-  {
-    id: "3",
-    nomePopular: "Banana Prata",
-    nomeCientifico: "Musa acuminata x balbisiana",
-    slug: "banana-prata",
-    familia: "Musaceae",
-    estrato: "Médio",
-    descricao: "Essencial na biomassa da agrofloresta, atua como fruteira de ciclo rápido e fornece sombra leve para mudas jovens."
-  }
-];
+// Garante que a página sempre busque os dados mais recentes do banco,
+// em vez de usar uma versão em cache gerada no build
+export const dynamic = 'force-dynamic';
 
-export default function Home() {
+export default async function Home() {
+  const especies = await prisma.especie.findMany({
+    orderBy: { criadoEm: 'desc' },
+  });
+
   return (
     <div className="space-y-8">
       {/* Cabeçalho da Seção */}
@@ -42,12 +20,18 @@ export default function Home() {
         </p>
       </div>
 
-      {/* Lista empilhada (Sem o grid) */}
-      <div className="flex flex-col">
-        {plantasFicticias.map((planta) => (
-          <EspecieCard key={planta.id} especie={planta} />
-        ))}
-      </div>
+      {/* Lista de espécies cadastradas */}
+      {especies.length === 0 ? (
+        <p className="text-stone-500 italic">
+          Nenhuma espécie cadastrada ainda. Que tal adicionar a primeira?
+        </p>
+      ) : (
+        <div className="flex flex-col">
+          {especies.map((especie) => (
+            <EspecieCard key={especie.id} especie={especie} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
