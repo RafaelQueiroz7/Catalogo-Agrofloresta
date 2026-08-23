@@ -1,3 +1,5 @@
+import { ehArquivoPdf } from '../lib/utils';
+
 export default function EspecieCard({ especie }) {
   return (
     <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition border border-stone-200 overflow-hidden flex flex-col md:flex-row mb-6">
@@ -6,14 +8,28 @@ export default function EspecieCard({ especie }) {
       <div className="w-full md:w-2/5 p-4 bg-stone-50 flex gap-3">
         <div className="flex-1 bg-emerald-100 rounded-lg flex items-center justify-center text-emerald-700 text-sm font-medium min-h-[220px] overflow-hidden">
           {especie.fotoRealUrl ? (
-            <img src={especie.fotoRealUrl} alt={`Foto de ${especie.nomePopular}`} className="w-full h-full object-cover" />
+            ehArquivoPdf(especie.fotoRealUrl) ? (
+              <a href={especie.fotoRealUrl} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center gap-2 text-emerald-800 hover:underline p-4 text-center">
+                <span className="text-3xl">📄</span>
+                <span>Ver PDF</span>
+              </a>
+            ) : (
+              <img src={especie.fotoRealUrl} alt={`Foto de ${especie.nomePopular}`} className="w-full h-full object-cover" />
+            )
           ) : (
             <span>Foto 1 (Árvore)</span>
           )}
         </div>
         <div className="flex-1 bg-emerald-200 rounded-lg flex items-center justify-center text-emerald-800 text-sm font-medium min-h-[220px] overflow-hidden">
           {especie.aquarelaUrl ? (
-            <img src={especie.aquarelaUrl} alt={`Aquarela de ${especie.nomePopular}`} className="w-full h-full object-cover" />
+            ehArquivoPdf(especie.aquarelaUrl) ? (
+              <a href={especie.aquarelaUrl} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center gap-2 text-emerald-900 hover:underline p-4 text-center">
+                <span className="text-3xl">📄</span>
+                <span>Ver PDF</span>
+              </a>
+            ) : (
+              <img src={especie.aquarelaUrl} alt={`Aquarela de ${especie.nomePopular}`} className="w-full h-full object-cover" />
+            )
           ) : (
             <span>Foto 2 (Detalhe)</span>
           )}
@@ -42,7 +58,7 @@ export default function EspecieCard({ especie }) {
         {/* Rodapé da lista com o botão */}
         <div className="pt-6 mt-6 border-t border-stone-100 flex justify-between items-center">
           <span className="text-sm text-stone-500 font-medium">
-            Família: <span className="text-stone-700">{especie.familia || "Não informado"}</span>
+            Família botânica: <span className="text-stone-700">{especie.familia || "Não informado"}</span>
           </span>
           <a 
             href={`/especies/${especie.slug}`}
