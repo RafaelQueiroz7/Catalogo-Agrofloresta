@@ -99,7 +99,7 @@ export default async function GuiaEspecie({ params }) {
               ehArquivoPdf(planta.aquarelaUrl) ? (
                 <LinkPdf url={planta.aquarelaUrl} />
               ) : (
-                <img src={planta.aquarelaUrl} alt="Aquarela" className="w-full h-48 object-cover rounded-xl mb-3" />
+                <img src={planta.aquarelaUrl} alt="Aquarela" className="w-full h-48 object-contain rounded-xl mb-3" />
               )
             ) : (
               <PlaceholderImagem texto="Aguardando aquarela" />
@@ -113,7 +113,7 @@ export default async function GuiaEspecie({ params }) {
               ehArquivoPdf(planta.carimboBotanicoUrl) ? (
                 <LinkPdf url={planta.carimboBotanicoUrl} />
               ) : (
-                <img src={planta.carimboBotanicoUrl} alt="Carimbo Botânico" className="w-full h-48 object-cover rounded-xl mb-3" />
+                <img src={planta.carimboBotanicoUrl} alt="Carimbo Botânico" className="w-full h-48 object-contain rounded-xl mb-3" />
               )
             ) : (
               <PlaceholderImagem texto="Aguardando carimbo" />
@@ -127,7 +127,7 @@ export default async function GuiaEspecie({ params }) {
               ehArquivoPdf(planta.mapaOrigemUrl) ? (
                 <LinkPdf url={planta.mapaOrigemUrl} />
               ) : (
-                <img src={planta.mapaOrigemUrl} alt="Mapa de Origem" className="w-full h-48 object-cover rounded-xl mb-3" />
+                <img src={planta.mapaOrigemUrl} alt="Mapa de Origem" className="w-full h-48 object-contain rounded-xl mb-3" />
               )
             ) : (
               <PlaceholderImagem texto="Aguardando mapa" />

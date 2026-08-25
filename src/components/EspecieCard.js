@@ -50,7 +50,7 @@ export default function EspecieCard({ especie }) {
           
           <p className="text-lg italic text-stone-500 mb-4">{especie.nomeCientifico}</p>
           
-          <p className="text-stone-600 leading-relaxed">
+          <p className="text-stone-600 leading-relaxed break-words line-clamp-3">
             {especie.caracteristicas}
           </p>
         </div>
