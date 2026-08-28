@@ -4,21 +4,21 @@ import Link from 'next/link';
 export default function NavBar() {
   return (
     <header className="bg-emerald-800 text-white shadow-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-3">
         <div className="flex items-center gap-3">
           <Image
             src="/logo-cedvb.png"
             alt="Símbolo da Escola CEDVB"
-            width={55}
-            height={55}
+            width={40}
+            height={40}
             className="object-contain"
           />
           <span className="text-2xl font-bold tracking-tight">
-            Agro<span className="text-emerald-300">floresta</span>
+            Agro<span className="text-emerald-300">Floresta</span>
           </span>
         </div>
         
-        <nav className="hidden md:flex items-center space-x-6 font-medium">
+        <nav className="flex items-center gap-4 font-medium">
           <Link href="/" className="hover:text-emerald-200 transition">Início</Link>
           <Link
             href="/admin/cadastrar"
