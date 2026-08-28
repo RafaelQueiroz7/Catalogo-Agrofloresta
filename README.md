@@ -1,36 +1,166 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🌱 Catálogo de Agrofloresta — CEDVB
 
-## Getting Started
+Catálogo e guia digital das espécies da agrofloresta escolar, desenvolvido para documentar e apresentar as plantas cultivadas no sistema agroflorestal da escola — suas características, origem, forma de cultivo, usos e cuidados.
 
-First, run the development server:
+**Site publicado:** [catalogo-agrofloresta.vercel.app](https://catalogo-agrofloresta.vercel.app)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 📖 Sobre o Projeto
+
+A escola CED Vargem Bonita mantém um sistema agroflorestal com diversas espécies de plantas usadas para fins educativos, alimentares e medicinais. Este projeto nasceu da necessidade de reunir esse conhecimento num só lugar: um catálogo público, navegável por qualquer visitante, e uma área administrativa onde a equipe da escola pode cadastrar novas espécies conforme forem sendo incorporadas à agrofloresta.
+
+Cada espécie conta com uma página-guia própria, reunindo texto (características, origem, forma de cultivo, propriedades e cuidados) e material visual produzido pela própria comunidade escolar — fotografias reais, aquarelas, carimbos botânicos e mapas de origem.
+
+## ✨ Funcionalidades
+
+**Para visitantes (público)**
+- Catálogo com todas as espécies cadastradas, exibidas em cards resumidos
+- Página-guia individual para cada espécie (`/especies/[slug]`), com ficha técnica completa
+- Galeria de materiais da escola (aquarela, carimbo botânico, mapa de origem), com suporte a imagens (JPG/PNG/WEBP) e documentos em PDF
+- Layout responsivo, adaptado para celular e desktop
+
+**Para administradores**
+- Área protegida por senha (`/admin`)
+- Formulário de cadastro de novas espécies, com geração automática de slug (URL amigável) a partir do nome popular
+- Upload de até 4 arquivos por espécie (foto real, carimbo botânico, aquarela, mapa de origem), armazenados no Supabase Storage
+- Validação de campos obrigatórios e checagem de nomes duplicados
+
+## 🛠️ Tecnologias Utilizadas
+
+| Categoria | Tecnologia |
+|---|---|
+| Framework | [Next.js](https://nextjs.org) 16 (App Router, Server Actions) |
+| Biblioteca de UI | [React](https://react.dev) 19 |
+| Estilização | [Tailwind CSS](https://tailwindcss.com) 4 |
+| Banco de dados | [PostgreSQL](https://www.postgresql.org), hospedado no [Supabase](https://supabase.com) |
+| ORM | [Prisma](https://www.prisma.io) 7, com driver adapter (`@prisma/adapter-pg`) |
+| Armazenamento de arquivos | [Supabase Storage](https://supabase.com/storage) (imagens e PDFs) |
+| Autenticação (admin) | Implementação própria via `middleware.js` + cookie assinado (sem biblioteca externa) |
+| Hospedagem / Deploy | [Vercel](https://vercel.com) |
+| Automação | Vercel Cron Jobs (rotina de *keep-alive* para o banco) |
+
+## 📂 Estrutura do Projeto
+
+```
+catalogo-agrofloresta/
+├── prisma/
+│   ├── schema.prisma           # Modelo de dados (Especie)
+│   └── migrations/
+├── public/
+│   └── logo-cedvb.png          # Símbolo da escola, usado na NavBar
+├── src/
+│   ├── app/
+│   │   ├── page.js                       # Catálogo (página inicial)
+│   │   ├── actions.js                    # Server Action: cadastrarEspecie
+│   │   ├── adminActions.js               # Server Actions: entrarAdmin, sairAdmin
+│   │   ├── especies/[slug]/page.js       # Guia individual da espécie
+│   │   ├── admin/
+│   │   │   ├── cadastrar/page.js         # Formulário de cadastro
+│   │   │   └── login/page.js             # Login administrativo
+│   │   └── api/keep-alive/route.js       # Endpoint chamado pelo Cron
+│   ├── components/
+│   │   ├── EspecieCard.js                # Card resumido do catálogo
+│   │   └── NavBar.js                     # Barra de navegação
+│   ├── server/
+│   │   ├── db.js                         # Cliente Prisma (com driver adapter)
+│   │   └── storage.js                    # Upload de arquivos ao Supabase Storage
+│   ├── lib/
+│   │   ├── auth.js                       # Geração do token de sessão do admin
+│   │   └── utils.js                      # Helpers (ex: detectar arquivo PDF)
+│   └── middleware.js                     # Protege as rotas /admin/*
+├── vercel.json                # Configuração do Cron Job de keep-alive
+├── next.config.mjs
+├── prisma.config.ts
+└── package.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🗄️ Modelo de Dados
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Tabela principal: `Especie`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Campo | Tipo | Observação |
+|---|---|---|
+| `id` | UUID | Identificador único |
+| `slug` | String | Único; gerado automaticamente a partir do nome popular |
+| `nomePopular` | String | Obrigatório |
+| `nomeCientifico` | String | Obrigatório |
+| `familia` | String? | Família botânica (opcional) |
+| `caracteristicas` | String | Descrição visual da planta |
+| `localOrigem` | String | Continente/país de origem |
+| `localEncontrada` | String | Onde é encontrada no Brasil |
+| `formaCultivo` | String | Luminosidade, solo, posição na agrofloresta |
+| `propriedadesUsos` | String | Usos alimentares/medicinais |
+| `cuidadosRecomendacoes` | String | Espinhos, toxinas, alergias, etc. |
+| `fotoRealUrl` / `carimboBotanicoUrl` / `aquarelaUrl` / `mapaOrigemUrl` | String? | URLs dos arquivos no Supabase Storage (imagem ou PDF) |
+| `criadoEm` / `atualizadoEm` | DateTime | Preenchidos automaticamente |
 
-## Learn More
+## 🚀 Como Rodar Localmente
 
-To learn more about Next.js, take a look at the following resources:
+### Pré-requisitos
+- Node.js 20 ou superior
+- Uma conta no [Supabase](https://supabase.com) (banco Postgres + Storage)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Passo a passo
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+# 1. Clonar o repositório
+git clone <url-do-repositorio>
+cd catalogo-agrofloresta
 
-## Deploy on Vercel
+# 2. Instalar as dependências
+npm install
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# 3. Criar o arquivo .env na raiz do projeto
+# (veja a lista completa de variáveis na seção abaixo)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# 4. Gerar o Prisma Client
+npx prisma generate
+
+# 5. Sincronizar o schema com o banco de dados
+npx prisma db push
+
+# 6. Rodar o servidor de desenvolvimento
+npm run dev
+```
+
+O projeto ficará disponível em `http://localhost:3000`.
+
+### Scripts disponíveis
+
+| Comando | Descrição |
+|---|---|
+| `npm run dev` | Inicia o servidor de desenvolvimento |
+| `npm run build` | Gera a build de produção |
+| `npm run start` | Roda a build de produção localmente |
+| `npm run lint` | Executa o linter (ESLint) |
+
+## 🔑 Variáveis de Ambiente
+
+| Variável | Descrição |
+|---|---|
+| `DATABASE_URL` | Connection string do Postgres (Supabase — recomenda-se o Session ou Transaction Pooler) |
+| `SUPABASE_URL` | URL do projeto no Supabase |
+| `SUPABASE_SERVICE_ROLE_KEY` | Chave de serviço, usada no servidor para upload de arquivos no Storage |
+| `ADMIN_PASSWORD` | Senha de acesso à área administrativa |
+| `SESSION_SECRET` | String aleatória usada para assinar o cookie de sessão do admin |
+| `CRON_SECRET` | Autentica as chamadas do Cron Job à rota `/api/keep-alive`. Gerada automaticamente pela Vercel em produção — só precisa ser definida manualmente para testes locais |
+
+## ☁️ Deploy
+
+O projeto está hospedado na **Vercel**, com deploy automático a partir da branch `dev` (configurada como *Production Branch* do projeto).
+
+Dois detalhes de configuração específicos deste projeto:
+
+- **Keep-alive do banco:** como o Supabase pausa projetos gratuitos após 7 dias de inatividade, um Cron Job da Vercel (definido em `vercel.json`) chama `/api/keep-alive` a cada 3 dias, mantendo o banco ativo.
+- **Driver adapter do Prisma:** o Prisma 7 exige um driver adapter explícito para conectar ao Postgres — por isso a dependência `@prisma/adapter-pg`, configurada em `src/server/db.js`.
+
+## 🔒 Segurança
+
+- A área `/admin` é protegida por senha e cookie de sessão assinado, verificado em `middleware.js` a cada requisição.
+- Chaves sensíveis (`SUPABASE_SERVICE_ROLE_KEY`, `ADMIN_PASSWORD`, `SESSION_SECRET`) nunca são expostas ao navegador — só são acessadas em código que roda no servidor.
+- O catálogo público não requer autenticação, por design: qualquer visitante pode consultar as espécies cadastradas.
+
+---
+
+*Projeto desenvolvido para uso educativo da escola CEDVB.*
