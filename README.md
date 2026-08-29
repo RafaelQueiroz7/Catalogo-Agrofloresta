@@ -8,7 +8,7 @@ Catálogo e guia digital das espécies da agrofloresta escolar, desenvolvido par
 
 ## 📖 Sobre o Projeto
 
-A escola CED Vargem Bonita mantém um sistema agroflorestal com diversas espécies de plantas usadas para fins educativos, alimentares e medicinais. Este projeto nasceu da necessidade de reunir esse conhecimento num só lugar: um catálogo público, navegável por qualquer visitante, e uma área administrativa onde a equipe da escola pode cadastrar novas espécies conforme forem sendo incorporadas à agrofloresta.
+A escola mantém um sistema agroflorestal com diversas espécies de plantas usadas para fins educativos, alimentares e medicinais. Este projeto nasceu da necessidade de reunir esse conhecimento num só lugar: um catálogo público, navegável por qualquer visitante, e uma área administrativa onde a equipe da escola pode cadastrar novas espécies conforme forem sendo incorporadas à agrofloresta.
 
 Cada espécie conta com uma página-guia própria, reunindo texto (características, origem, forma de cultivo, propriedades e cuidados) e material visual produzido pela própria comunidade escolar — fotografias reais, aquarelas, carimbos botânicos e mapas de origem.
 
@@ -144,6 +144,18 @@ Dois detalhes de configuração específicos deste projeto:
 
 - **Keep-alive do banco:** como o Supabase pausa projetos gratuitos após 7 dias de inatividade, um Cron Job da Vercel (definido em `vercel.json`) chama `/api/keep-alive` a cada 3 dias, mantendo o banco ativo.
 - **Driver adapter do Prisma:** o Prisma 7 exige um driver adapter explícito para conectar ao Postgres — por isso a dependência `@prisma/adapter-pg`, configurada em `src/server/db.js`.
+
+## 📄 Documentação
+
+A documentação formal do projeto está disponível na pasta [`docs/`](./docs), nos formatos DOCX e PDF:
+
+| Documento | DOCX | PDF |
+|---|---|---|
+| Documento de Arquitetura | [docs/Documento_de_Arquitetura_Catalogo_Agroflorestal_CEDVB.docx](./docs/Documento_de_Arquitetura_Catalogo_Agroflorestal_CEDVB.docx) | [docs/Documento_de_Arquitetura_Catalogo_Agroflorestal_CEDVB.pdf](./docs/Documento_de_Arquitetura_Catalogo_Agroflorestal_CEDVB.pdf) |
+
+> ⚠️ Ajuste os nomes dos arquivos de Documento de Escopo acima para bater exatamente com os nomes que você salvou na pasta `docs/` — não tenho como confirmar esse nome, já que esse documento não foi gerado nesta conversa.
+
+O Documento de Arquitetura descreve o padrão arquitetural adotado (Next.js App Router com React Server Components e Server Actions), as camadas do sistema, o modelo de dados e a topologia de implantação (Vercel + Supabase).
 
 ## 🔒 Segurança
 
