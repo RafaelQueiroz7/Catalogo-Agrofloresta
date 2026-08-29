@@ -153,7 +153,6 @@ A documentação formal do projeto está disponível na pasta [`docs/`](./docs),
 |---|---|---|
 | Documento de Arquitetura | [docs/Documento_de_Arquitetura_Catalogo_Agroflorestal_CEDVB.docx](./docs/Documento_de_Arquitetura_Catalogo_Agroflorestal_CEDVB.docx) | [docs/Documento_de_Arquitetura_Catalogo_Agroflorestal_CEDVB.pdf](./docs/Documento_de_Arquitetura_Catalogo_Agroflorestal_CEDVB.pdf) |
 
-> ⚠️ Ajuste os nomes dos arquivos de Documento de Escopo acima para bater exatamente com os nomes que você salvou na pasta `docs/` — não tenho como confirmar esse nome, já que esse documento não foi gerado nesta conversa.
 
 O Documento de Arquitetura descreve o padrão arquitetural adotado (Next.js App Router com React Server Components e Server Actions), as camadas do sistema, o modelo de dados e a topologia de implantação (Vercel + Supabase).
 
