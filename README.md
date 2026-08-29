@@ -135,16 +135,6 @@ O projeto ficará disponível em `http://localhost:3000`.
 | `npm run start` | Roda a build de produção localmente |
 | `npm run lint` | Executa o linter (ESLint) |
 
-## 🔑 Variáveis de Ambiente
-
-| Variável | Descrição |
-|---|---|
-| `DATABASE_URL` | Connection string do Postgres (Supabase — recomenda-se o Session ou Transaction Pooler) |
-| `SUPABASE_URL` | URL do projeto no Supabase |
-| `SUPABASE_SERVICE_ROLE_KEY` | Chave de serviço, usada no servidor para upload de arquivos no Storage |
-| `ADMIN_PASSWORD` | Senha de acesso à área administrativa |
-| `SESSION_SECRET` | String aleatória usada para assinar o cookie de sessão do admin |
-| `CRON_SECRET` | Autentica as chamadas do Cron Job à rota `/api/keep-alive`. Gerada automaticamente pela Vercel em produção — só precisa ser definida manualmente para testes locais |
 
 ## ☁️ Deploy
 
