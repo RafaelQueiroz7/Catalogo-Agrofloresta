@@ -11,7 +11,7 @@ export default function NavBar() {
             alt="Símbolo da Escola CEDVB"
             width={40}
             height={40}
-            className="object-contain"
+            className="object-contain w-10 h-10"
           />
           <span className="text-2xl font-bold tracking-tight">
             Agro<span className="text-emerald-300">Floresta</span>
