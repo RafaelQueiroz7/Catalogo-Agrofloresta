@@ -43,34 +43,33 @@ export default async function GuiaEspecie({ params }) {
   }
 
   return (
-    <div className="max-w-5xl mx-auto space-y-12 pb-12">
-      
+    <><div className="max-w-5xl mx-auto space-y-12 pb-12">
+
       {/* 1. Cabeçalho com Foto Real (ou Placeholder) e Títulos */}
       <div className="bg-white rounded-3xl shadow-sm border border-stone-200 overflow-hidden flex flex-col md:flex-row">
-                {planta.fotoRealUrl ? (
-                  ehArquivoPdf(planta.fotoRealUrl) ? (
-                    <a
-                      href={planta.fotoRealUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full md:w-1/2 h-72 md:h-auto bg-stone-100 flex flex-col items-center justify-center text-emerald-700 font-semibold hover:bg-stone-200 transition"
-                    >
-                      <span className="text-5xl mb-2">📄</span>
-                      <span className="underline">Abrir PDF</span>
-                    </a>
-                  ) : (
-                    <div 
-                      className="w-full md:w-1/2 h-72 md:h-auto bg-stone-100"
-                      style={{ backgroundImage: `url(${planta.fotoRealUrl})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
-                    />
-                  )
-                ) : (
+        {planta.fotoRealUrl ? (
+          ehArquivoPdf(planta.fotoRealUrl) ? (
+            <a
+              href={planta.fotoRealUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full md:w-1/2 h-72 md:h-auto bg-stone-100 flex flex-col items-center justify-center text-emerald-700 font-semibold hover:bg-stone-200 transition"
+            >
+              <span className="text-5xl mb-2">📄</span>
+              <span className="underline">Abrir PDF</span>
+            </a>
+          ) : (
+            <div
+              className="w-full md:w-1/2 h-72 md:h-auto bg-stone-100"
+              style={{ backgroundImage: `url(${planta.fotoRealUrl})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+          )
+        ) : (
           <div className="w-full md:w-1/2 h-72 bg-stone-100 flex flex-col items-center justify-center text-stone-500 font-medium border-r border-stone-200">
             <span className="text-5xl mb-2">📸</span>
             <span className="italic text-sm">Aguardando fotografia real</span>
           </div>
         )}
-        
+
         <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center bg-emerald-900 text-white">
           <h1 className="text-4xl md:text-5xl font-extrabold mb-2">{planta.nomePopular}</h1>
           <p className="text-xl md:text-2xl text-emerald-200 italic font-serif mb-6">{planta.nomeCientifico}</p>
@@ -91,7 +90,7 @@ export default async function GuiaEspecie({ params }) {
         <div className="border-b-2 border-emerald-800 pb-2 inline-block">
           <h2 className="text-3xl font-bold text-stone-800">Galeria da Escola</h2>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Espaço da Aquarela */}
           <div className="bg-white p-4 rounded-2xl shadow-sm border border-stone-200 text-center flex flex-col">
@@ -139,7 +138,7 @@ export default async function GuiaEspecie({ params }) {
 
       {/* 3. Textos e Ficha Técnica */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        
+
         {/* Coluna Esquerda */}
         <div className="space-y-8">
           <section className="bg-white p-8 rounded-3xl shadow-sm border border-stone-200">
@@ -174,12 +173,29 @@ export default async function GuiaEspecie({ params }) {
 
       </div>
 
-      <div className="text-center pt-8">
+      {/* 4. Ficha de Espécie preenchida por alunos */}
+      <section className="bg-white p-8 rounded-3xl shadow-sm border border-stone-200">
+        <h3 className="text-xl font-bold text-emerald-800 mb-3 flex items-center gap-2">📄 Ficha de Espécie</h3>
+        <p className="text-stone-600 text-sm break-words mb-4">FICHA DE ESPÉCIE PREENCHIDA POR ALUNOS</p>
+        {planta.fichaUrl ? (
+          <a
+            href={planta.fichaUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white font-semibold py-2 px-5 rounded-lg transition"
+        >
+          📄 Ver Ficha Completa (PDF)
+        </a>
+      ) : (
+        <p className="text-stone-500 italic">Ficha de espécie não disponível.</p>
+
+      )}
+    </section>
+    
+    <div className="text-center pt-8">
         <Link href="/" className="inline-block bg-stone-200 hover:bg-stone-300 text-stone-700 font-bold py-3 px-6 rounded-xl transition">
           &larr; Voltar para o Catálogo
         </Link>
-      </div>
-
-    </div>
+      </div></div></>
   );
 }

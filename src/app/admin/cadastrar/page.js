@@ -127,6 +127,10 @@ export default function PainelCadastro() {
               <label htmlFor="mapaOrigem" className="block text-sm font-semibold text-stone-700 mb-1">🗺️ Mapa de Origem</label>
               <input type="file" id="mapaOrigem" name="mapaOrigem" accept="image/*,.pdf" className="w-full text-sm text-stone-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-emerald-50 file:text-emerald-700 file:font-semibold hover:file:bg-emerald-100" />
             </div>
+            <div>
+              <label htmlFor="ficha" className="block text-sm font-semibold text-stone-700 mb-1">📄 Ficha de Espécie (preenchida por alunos)</label>
+              <input type="file" id="ficha" name="ficha" accept="image/*,.pdf" className="w-full text-sm text-stone-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-emerald-50 file:text-emerald-700 file:font-semibold hover:file:bg-emerald-100" />
+            </div>
           </div>
         </section>
         
