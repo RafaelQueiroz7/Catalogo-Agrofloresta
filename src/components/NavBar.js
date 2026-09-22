@@ -21,7 +21,7 @@ export default function NavBar() {
         <nav className="flex items-center gap-4 font-medium">
           <Link href="/" className="hover:text-emerald-200 transition">Início</Link>
           <Link
-            href="/admin/cadastrar"
+            href="/admin"
             className="bg-emerald-700 hover:bg-emerald-600 border border-emerald-600 px-4 py-2 rounded-lg transition"
           >
             Área Administrativa

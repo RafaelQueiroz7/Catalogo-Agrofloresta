@@ -17,7 +17,7 @@ export default function PainelCadastro() {
       {/* Cabeçalho */}
       <div className="flex justify-between items-center border-b border-stone-200 pb-4">
         <h1 className="text-3xl font-bold text-stone-800">Novo Cadastro de Espécie</h1>
-        <Link href="/" className="text-emerald-700 hover:underline font-semibold">&larr; Voltar ao Catálogo</Link>
+        <Link href="/admin" className="text-emerald-700 hover:underline font-semibold">&larr; Voltar ao Painel</Link>
         <form action={sairAdmin}>
           <button type="submit" className="text-sm text-stone-500 hover:text-red-600 font-semibold underline">Sair</button>
         </form>

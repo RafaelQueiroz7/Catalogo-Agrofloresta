@@ -21,7 +21,7 @@ export async function entrarAdmin(formData) {
     path: '/',
   });
 
-  redirect('/admin/cadastrar');
+  redirect('/admin');
 }
 
 export async function sairAdmin() {

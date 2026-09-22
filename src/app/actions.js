@@ -57,3 +57,63 @@ export async function cadastrarEspecie(formData) {
 
   redirect('/');
 }
+
+async function manterOuSubstituir(file, urlAtual, slug) {
+  if (!file || file.size === 0) return urlAtual;
+  return await enviarArquivo(file, slug);
+}
+
+export async function atualizarEspecie(slugAtual, formData) {
+  const nomePopular = formData.get('nomePopular');
+  const nomeCientifico = formData.get('nomeCientifico');
+
+  if (!nomePopular || !nomeCientifico) {
+    throw new Error("Nome popular e científico são obrigatórios.");
+  }
+
+  const especieAtual = await prisma.especie.findUnique({ where: { slug: slugAtual } });
+  if (!especieAtual) {
+    throw new Error("Espécie não encontrada.");
+  }
+
+  const novoSlug = nomePopular !== especieAtual.nomePopular ? gerarSlug(nomePopular) : slugAtual;
+
+  const [fotoRealUrl, carimboBotanicoUrl, aquarelaUrl, mapaOrigemUrl, fichaUrl] = await Promise.all([
+    manterOuSubstituir(formData.get('fotoReal'), especieAtual.fotoRealUrl, novoSlug),
+    manterOuSubstituir(formData.get('carimboBotanico'), especieAtual.carimboBotanicoUrl, novoSlug),
+    manterOuSubstituir(formData.get('aquarela'), especieAtual.aquarelaUrl, novoSlug),
+    manterOuSubstituir(formData.get('mapaOrigem'), especieAtual.mapaOrigemUrl, novoSlug),
+    manterOuSubstituir(formData.get('ficha'), especieAtual.fichaUrl, novoSlug),
+  ]);
+
+  try {
+    await prisma.especie.update({
+      where: { slug: slugAtual },
+      data: {
+        slug: novoSlug,
+        nomePopular,
+        nomeCientifico,
+        familia: formData.get('familia') || null,
+        caracteristicas: formData.get('caracteristicas') || '',
+        localOrigem: formData.get('localOrigem') || '',
+        localEncontrada: formData.get('localEncontrada') || '',
+        formaCultivo: formData.get('formaCultivo') || '',
+        propriedadesUsos: formData.get('propriedadesUsos') || '',
+        cuidadosRecomendacoes: formData.get('cuidadosRecomendacoes') || '',
+        fotoRealUrl,
+        carimboBotanicoUrl,
+        aquarelaUrl,
+        mapaOrigemUrl,
+        fichaUrl,
+      },
+    });
+  } catch (error) {
+    if (error.code === 'P2002') {
+      throw new Error("Já existe outra espécie cadastrada com esse nome popular.");
+    }
+    console.error("Erro ao atualizar espécie:", error);
+    throw new Error("Ocorreu um erro ao atualizar os dados.");
+  }
+
+  redirect('/admin');
+}
