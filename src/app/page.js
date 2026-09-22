@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic';
 
 export default async function Home() {
   const especies = await prisma.especie.findMany({
-    orderBy: { criadoEm: 'desc' },
+    orderBy: { nomePopular: 'asc' },
   });
 
   return (
