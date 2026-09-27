@@ -26,6 +26,7 @@ model Especie {
   formaCultivo          String
   propriedadesUsos      String
   cuidadosRecomendacoes String
+  referenciasBibliograficas String?
 
   // Imagens (O símbolo '?' significa que é opcional) 
   fotoRealUrl           String?

@@ -103,6 +103,10 @@ export default function PainelCadastro() {
               <label htmlFor="cuidadosRecomendacoes" className="block text-sm font-semibold text-stone-700 mb-1">📋 Cuidados e Recomendações</label>
               <textarea id="cuidadosRecomendacoes" name="cuidadosRecomendacoes" rows="3" placeholder="Espinhos, toxinas, alergias? (Informação crucial para manejo escolar)" className="w-full px-4 py-2 border border-stone-200 rounded-lg focus:ring-2 focus:ring-emerald-200 focus:border-emerald-500 transition"></textarea>
             </div>
+            <div>
+              <label htmlFor="referenciasBibliograficas" className="block text-sm font-semibold text-stone-700 mb-1">📚 Referências Bibliográficas</label>
+              <textarea id="referenciasBibliograficas" name="referenciasBibliograficas" rows="3" placeholder="Fontes consultadas." className="w-full px-4 py-2 border border-stone-200 rounded-lg focus:ring-2 focus:ring-emerald-200 focus:border-emerald-500 transition"></textarea>
+            </div>
           </div>
         </section>
 

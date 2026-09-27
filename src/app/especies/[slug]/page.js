@@ -196,7 +196,7 @@ export default async function GuiaEspecie({ params }) {
 
         <section className="bg-white p-8 rounded-3xl shadow-sm border border-stone-200">
           <h3 className="text-xl font-bold text-emerald-800 mb-3 flex items-center gap-2">
-            🌱 Forma de Cultivo e Estrato na Agrofloresta
+            🌱 Forma de Cultivo
           </h3>
           <p className="text-stone-700 leading-relaxed break-words">
             {planta.formaCultivo || 'Informação não cadastrada.'}
@@ -245,6 +245,16 @@ export default async function GuiaEspecie({ params }) {
         ) : (
           <p className="text-stone-500 italic">Ficha de espécie ainda não enviada.</p>
         )}
+      </section>
+      
+      {/* 5. Referências Bibliográficas */}
+      <section className="bg-white p-8 rounded-3xl shadow-sm border border-stone-200">
+        <h3 className="text-xl font-bold text-emerald-800 mb-3 flex items-center gap-2">
+          📚 Referências Bibliográficas
+        </h3>
+        <p className="text-stone-700 leading-relaxed break-words whitespace-pre-line">
+          {planta.referenciasBibliograficas || 'Informação não cadastrada.'}
+        </p>
       </section>
 
       {/* Navegação Inferior - Voltar ao Catálogo */}
