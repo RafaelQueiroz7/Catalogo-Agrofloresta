@@ -110,27 +110,43 @@ export default function PainelCadastro() {
           </div>
         </section>
 
+        {/* Seção 4: Mídias e Documentos */}
         <section className="bg-white p-8 rounded-2xl shadow-sm border border-stone-200 space-y-6">
-          <h2 className="text-xl font-bold text-emerald-800 border-b border-stone-100 pb-2">Imagens e Documentos</h2>
-          <p className="text-sm text-stone-500">Aceita JPG, PNG, WEBP ou PDF. Campos opcionais.</p>
+          <h2 className="text-xl font-bold text-emerald-800 border-b border-stone-100 pb-2">Mídias e Documentos</h2>
+          <p className="text-sm text-stone-500">Links para mapas e arquivos de imagens (JPG, PNG, WEBP ou PDF). Campos opcionais.</p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <div>
+              <label htmlFor="mapaHtmlUrl" className="block text-sm font-semibold text-stone-700 mb-1">🗺️ Link do Mapa Interativo (HTML)</label>
+              <input type="url" id="mapaHtmlUrl" name="mapaHtmlUrl" placeholder="Ex: https://meumapa.com/mapa.html" className="w-full px-4 py-2 border border-stone-200 rounded-lg focus:ring-2 focus:ring-emerald-200 focus:border-emerald-500 transition" />
+            </div>
+
+            <div>
+              <label htmlFor="mapaimagem" className="block text-sm font-semibold text-stone-700 mb-1">📸 Mapa de Origem</label>
+              <input type="file" id="mapaimagem" name="mapaimagem" accept="image/*,.pdf" className="w-full text-sm text-stone-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-emerald-50 file:text-emerald-700 file:font-semibold hover:file:bg-emerald-100" />
+            </div>
+
             <div>
               <label htmlFor="fotoReal" className="block text-sm font-semibold text-stone-700 mb-1">📸 Foto Real</label>
               <input type="file" id="fotoReal" name="fotoReal" accept="image/*,.pdf" className="w-full text-sm text-stone-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-emerald-50 file:text-emerald-700 file:font-semibold hover:file:bg-emerald-100" />
             </div>
+
+            <div>
+              <label htmlFor="fotoPlantaInteira" className="block text-sm font-semibold text-stone-700 mb-1">🌳 Foto da Planta Inteira</label>
+              <input type="file" id="fotoPlantaInteira" name="fotoPlantaInteira" accept="image/*,.pdf" className="w-full text-sm text-stone-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-emerald-50 file:text-emerald-700 file:font-semibold hover:file:bg-emerald-100" />
+            </div>
+
             <div>
               <label htmlFor="carimboBotanico" className="block text-sm font-semibold text-stone-700 mb-1">🔖 Carimbo Botânico</label>
               <input type="file" id="carimboBotanico" name="carimboBotanico" accept="image/*,.pdf" className="w-full text-sm text-stone-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-emerald-50 file:text-emerald-700 file:font-semibold hover:file:bg-emerald-100" />
             </div>
+
             <div>
               <label htmlFor="aquarela" className="block text-sm font-semibold text-stone-700 mb-1">🎨 Aquarela</label>
               <input type="file" id="aquarela" name="aquarela" accept="image/*,.pdf" className="w-full text-sm text-stone-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-emerald-50 file:text-emerald-700 file:font-semibold hover:file:bg-emerald-100" />
             </div>
-            <div>
-              <label htmlFor="mapaOrigem" className="block text-sm font-semibold text-stone-700 mb-1">🗺️ Mapa de Origem</label>
-              <input type="file" id="mapaOrigem" name="mapaOrigem" accept="image/*,.pdf" className="w-full text-sm text-stone-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-emerald-50 file:text-emerald-700 file:font-semibold hover:file:bg-emerald-100" />
-            </div>
+
             <div>
               <label htmlFor="ficha" className="block text-sm font-semibold text-stone-700 mb-1">📄 Ficha de Espécie (preenchida por alunos)</label>
               <input type="file" id="ficha" name="ficha" accept="image/*,.pdf" className="w-full text-sm text-stone-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-emerald-50 file:text-emerald-700 file:font-semibold hover:file:bg-emerald-100" />

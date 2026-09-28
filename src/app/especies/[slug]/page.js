@@ -30,6 +30,20 @@ function LinkPdf({ url }) {
   );
 }
 
+function LinkMapaHtml({ url }) {
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="w-full h-48 rounded-xl mb-3 bg-stone-100 flex flex-col items-center justify-center text-emerald-700 hover:bg-stone-200 transition border-2 border-dashed border-emerald-300"
+    >
+      <span className="text-4xl mb-1">🗺️</span>
+      <span className="text-sm font-semibold underline">Abrir Mapa Interativo</span>
+    </a>
+  );
+}
+
 export default async function GuiaEspecie({ params }) {
   const { slug } = await params;
 
@@ -75,7 +89,7 @@ export default async function GuiaEspecie({ params }) {
       </div>
 
       {/* 1. Galeria Visual (Cards de Imagens com Suporte a Zoom) */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
         
         {/* Foto Real */}
         <div className="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm flex flex-col justify-between">
@@ -140,20 +154,53 @@ export default async function GuiaEspecie({ params }) {
           </p>
         </div>
 
-        {/* Mapa de Origem */}
+        {/* Nova Foto: Planta Inteira */}
         <div className="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm flex flex-col justify-between">
           <div>
-            {planta.mapaOrigemUrl ? (
-              ehArquivoPdf(planta.mapaOrigemUrl) ? (
-                <LinkPdf url={planta.mapaOrigemUrl} />
+            {planta.fotoPlantaInteiraUrl ? (
+              ehArquivoPdf(planta.fotoPlantaInteiraUrl) ? (
+                <LinkPdf url={planta.fotoPlantaInteiraUrl} />
               ) : (
                 <ImagemComZoom 
-                  src={planta.mapaOrigemUrl} 
-                  alt={`Mapa de origem de ${planta.nomePopular}`} 
+                  src={planta.fotoPlantaInteiraUrl} 
+                  alt={`Planta inteira de ${planta.nomePopular}`} 
                 />
               )
             ) : (
-              <PlaceholderImagem texto="Mapa de Origem em breve" />
+              <PlaceholderImagem texto="Planta Inteira em breve" />
+            )}
+          </div>
+          <p className="text-center text-xs font-semibold text-stone-600 uppercase tracking-wide border-t border-stone-100 pt-3">
+            🌳 Planta Inteira
+          </p>
+        </div>
+
+        {/* Mapa de Origem (Imagem Estática Clicável -> Abre HTML) */}
+        <div className="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm flex flex-col justify-between">
+          <div>
+            {planta.mapaimagemUrl && planta.mapaHtmlUrl ? (
+              <a
+                href={planta.mapaHtmlUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative group block cursor-pointer"
+              >
+                <img
+                  src={planta.mapaimagemUrl}
+                  alt={`Mapa de origem de ${planta.nomePopular}`}
+                  className="w-full h-48 object-contain rounded-xl mb-3 shadow-sm transition"
+                />
+                {/* Overlay Escuro com Texto que surge ao passar o rato (Hover) */}
+                <div className="absolute inset-0 bg-stone-900/60 opacity-0 group-hover:opacity-100 rounded-xl transition-all duration-300 flex flex-col items-center justify-center text-white font-medium text-sm gap-2 mb-3 backdrop-blur-sm">
+                  <span className="text-4xl drop-shadow-md">🌍</span>
+                  <span className="underline font-bold drop-shadow-md">Abrir Mapa Interativo</span>
+                </div>
+              </a>
+            ) : planta.mapaHtmlUrl ? (
+              /* Caso tenha apenas o link HTML mas falte a imagem estática */
+              <LinkMapaHtml url={planta.mapaHtmlUrl} />
+            ) : (
+              <PlaceholderImagem texto="Mapa em breve" />
             )}
           </div>
           <p className="text-center text-xs font-semibold text-stone-600 uppercase tracking-wide border-t border-stone-100 pt-3">

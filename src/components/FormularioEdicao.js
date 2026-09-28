@@ -11,9 +11,11 @@ export default function FormularioEdicao({ especie }) {
 
   const camposArquivo = [
     { name: 'fotoReal', label: '📸 Foto Real', urlAtual: especie.fotoRealUrl },
+    { name: 'fotoPlantaInteira', label: '🌳 Foto da Planta Inteira', urlAtual: especie.fotoPlantaInteiraUrl },
+    { name: 'mapaimagem', label: '🗺️ Mapa de Origem', urlAtual: especie.mapaimagemUrl },
     { name: 'carimboBotanico', label: '🔖 Carimbo Botânico', urlAtual: especie.carimboBotanicoUrl },
     { name: 'aquarela', label: '🎨 Aquarela', urlAtual: especie.aquarelaUrl },
-    { name: 'mapaOrigem', label: '🗺️ Mapa de Origem', urlAtual: especie.mapaOrigemUrl },
+
   ];
 
   return (
@@ -106,6 +108,15 @@ export default function FormularioEdicao({ especie }) {
           <p className="text-sm text-stone-500">Envie um novo arquivo só se quiser substituir o atual. Deixe em branco para manter o que já está cadastrado.</p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <div>
+              <label htmlFor="mapaHtmlUrl" className="block text-sm font-semibold text-stone-700 mb-1">🗺️ Link do Mapa Interativo (HTML)</label>
+              <input type="url" id="mapaHtmlUrl" name="mapaHtmlUrl" defaultValue={especie.mapaHtmlUrl || ''} placeholder="Ex: https://meumapa.com/mapa.html" className="w-full px-4 py-2 border border-stone-200 rounded-lg focus:ring-2 focus:ring-emerald-200 focus:border-emerald-500 transition" />
+              {especie.mapaHtmlUrl && (
+                <a href={especie.mapaHtmlUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-emerald-700 hover:underline mt-1 inline-block">Ver link atual</a>
+              )}
+            </div>
+
             {camposArquivo.map((campo) => (
               <div key={campo.name}>
                 <label htmlFor={campo.name} className="block text-sm font-semibold text-stone-700 mb-1">{campo.label}</label>
@@ -115,6 +126,7 @@ export default function FormularioEdicao({ especie }) {
                 )}
               </div>
             ))}
+            
             <div>
               <label htmlFor="ficha" className="block text-sm font-semibold text-stone-700 mb-1">📝 Ficha da Espécie</label>
               <input type="file" id="ficha" name="ficha" accept=".pdf" className="w-full text-sm text-stone-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-emerald-50 file:text-emerald-700 file:font-semibold hover:file:bg-emerald-100" />

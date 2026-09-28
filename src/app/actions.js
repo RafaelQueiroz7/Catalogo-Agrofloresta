@@ -19,11 +19,11 @@ export async function cadastrarEspecie(formData) {
 
   const slug = gerarSlug(nomePopular);
 
-  const [fotoRealUrl, carimboBotanicoUrl, aquarelaUrl, mapaOrigemUrl, fichaUrl] = await Promise.all([
+  const [fotoRealUrl, carimboBotanicoUrl, aquarelaUrl, mapaimagemUrl, fichaUrl] = await Promise.all([
     enviarArquivo(formData.get('fotoReal'), slug),
     enviarArquivo(formData.get('carimboBotanico'), slug),
     enviarArquivo(formData.get('aquarela'), slug),
-    enviarArquivo(formData.get('mapaOrigem'), slug),
+    enviarArquivo(formData.get('mapaimagem'), slug),
     enviarArquivo(formData.get('ficha'), slug),
   ]);
 
@@ -42,8 +42,10 @@ export async function cadastrarEspecie(formData) {
     fotoRealUrl,
     carimboBotanicoUrl,
     aquarelaUrl,
-    mapaOrigemUrl,
     fichaUrl,
+    mapaHtmlUrl: formData.get('mapaHtmlUrl') || null,
+    mapaimagemUrl,
+    PlantaInteiraUrl
   };
 
   try {
@@ -79,12 +81,20 @@ export async function atualizarEspecie(slugAtual, formData) {
 
   const novoSlug = nomePopular !== especieAtual.nomePopular ? gerarSlug(nomePopular) : slugAtual;
 
-  const [fotoRealUrl, carimboBotanicoUrl, aquarelaUrl, mapaOrigemUrl, fichaUrl] = await Promise.all([
+  const [
+      fotoRealUrl, 
+      carimboBotanicoUrl, 
+      aquarelaUrl, 
+      fichaUrl,
+      mapaimagemUrl,
+      PlantaInteiraUrl
+  ] = await Promise.all([
     manterOuSubstituir(formData.get('fotoReal'), especieAtual.fotoRealUrl, novoSlug),
     manterOuSubstituir(formData.get('carimboBotanico'), especieAtual.carimboBotanicoUrl, novoSlug),
     manterOuSubstituir(formData.get('aquarela'), especieAtual.aquarelaUrl, novoSlug),
-    manterOuSubstituir(formData.get('mapaOrigem'), especieAtual.mapaOrigemUrl, novoSlug),
     manterOuSubstituir(formData.get('ficha'), especieAtual.fichaUrl, novoSlug),
+    manterOuSubstituir(formData.get('mapaimagem'), especieAtual.mapaimagemUrl, novoSlug),
+    manterOuSubstituir(formData.get('fotoPlantaInteira'), especieAtual.PlantaInteiraUrl, novoSlug),
   ]);
 
   try {
@@ -105,9 +115,11 @@ export async function atualizarEspecie(slugAtual, formData) {
         fotoRealUrl,
         carimboBotanicoUrl,
         aquarelaUrl,
-        mapaOrigemUrl,
         fichaUrl,
-      },
+        mapaHtmlUrl: formData.get('mapaHtmlUrl') || null,
+        mapaimagemUrl,
+        PlantaInteiraUrl,
+      }
     });
   } catch (error) {
     if (error.code === 'P2002') {

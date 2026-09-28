@@ -32,8 +32,10 @@ model Especie {
   fotoRealUrl           String?
   carimboBotanicoUrl    String?
   aquarelaUrl           String?
-  mapaOrigemUrl         String?
+  PlantaInteiraUrl      String?
   fichaUrl              String?
+  mapaHtmlUrl           String?
+  mapaimagemUrl         String?
 
   // Controle de tempo (Boa prática de banco de dados)
   criadoEm              DateTime @default(now())
