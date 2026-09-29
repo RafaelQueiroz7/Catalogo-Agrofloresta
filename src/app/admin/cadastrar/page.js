@@ -128,12 +128,12 @@ export default function PainelCadastro() {
             </div>
 
             <div>
-              <label htmlFor="fotoReal" className="block text-sm font-semibold text-stone-700 mb-1">📸 Foto Real</label>
+              <label htmlFor="fotoReal" className="block text-sm font-semibold text-stone-700 mb-1">📸 Foto da Folha</label>
               <input type="file" id="fotoReal" name="fotoReal" accept="image/*,.pdf" className="w-full text-sm text-stone-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-emerald-50 file:text-emerald-700 file:font-semibold hover:file:bg-emerald-100" />
             </div>
 
             <div>
-              <label htmlFor="fotoPlantaInteira" className="block text-sm font-semibold text-stone-700 mb-1">🌳 Foto da Planta Inteira</label>
+              <label htmlFor="fotoPlantaInteira" className="block text-sm font-semibold text-stone-700 mb-1">🌳 Foto da Planta</label>
               <input type="file" id="fotoPlantaInteira" name="fotoPlantaInteira" accept="image/*,.pdf" className="w-full text-sm text-stone-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-emerald-50 file:text-emerald-700 file:font-semibold hover:file:bg-emerald-100" />
             </div>
 

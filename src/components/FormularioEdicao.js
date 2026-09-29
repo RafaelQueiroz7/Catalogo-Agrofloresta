@@ -10,8 +10,8 @@ export default function FormularioEdicao({ especie }) {
   const atualizarComSlug = atualizarEspecie.bind(null, especie.slug);
 
   const camposArquivo = [
-    { name: 'fotoReal', label: '📸 Foto Real', urlAtual: especie.fotoRealUrl },
-    { name: 'fotoPlantaInteira', label: '🌳 Foto da Planta Inteira', urlAtual: especie.fotoPlantaInteiraUrl },
+    { name: 'fotoReal', label: '📸 Foto da Folha', urlAtual: especie.fotoRealUrl },
+    { name: 'fotoPlantaInteira', label: '🌳 Foto da Planta', urlAtual: especie.fotoPlantaInteiraUrl },
     { name: 'mapaimagem', label: '🗺️ Mapa de Origem', urlAtual: especie.mapaimagemUrl },
     { name: 'carimboBotanico', label: '🔖 Carimbo Botânico', urlAtual: especie.carimboBotanicoUrl },
     { name: 'aquarela', label: '🎨 Aquarela', urlAtual: especie.aquarelaUrl },

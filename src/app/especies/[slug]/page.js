@@ -108,7 +108,7 @@ export default async function GuiaEspecie({ params }) {
             )}
           </div>
           <p className="text-center text-xs font-semibold text-stone-600 uppercase tracking-wide border-t border-stone-100 pt-3">
-            📷 Foto Real
+            📷 Foto da Folha
           </p>
         </div>
 
@@ -157,12 +157,12 @@ export default async function GuiaEspecie({ params }) {
         {/* Nova Foto: Planta Inteira */}
         <div className="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm flex flex-col justify-between">
           <div>
-            {planta.fotoPlantaInteiraUrl ? (
-              ehArquivoPdf(planta.fotoPlantaInteiraUrl) ? (
-                <LinkPdf url={planta.fotoPlantaInteiraUrl} />
+            {planta.PlantaInteiraUrl ? (
+              ehArquivoPdf(planta.PlantaInteiraUrl) ? (
+                <LinkPdf url={planta.PlantaInteiraUrl} />
               ) : (
                 <ImagemComZoom 
-                  src={planta.fotoPlantaInteiraUrl} 
+                  src={planta.PlantaInteiraUrl} 
                   alt={`Planta inteira de ${planta.nomePopular}`} 
                 />
               )
@@ -171,7 +171,7 @@ export default async function GuiaEspecie({ params }) {
             )}
           </div>
           <p className="text-center text-xs font-semibold text-stone-600 uppercase tracking-wide border-t border-stone-100 pt-3">
-            🌳 Planta Inteira
+            🌳 Foto da Planta
           </p>
         </div>
 
