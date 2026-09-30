@@ -27,6 +27,7 @@ export default function SobreProjeto() {
               <li>Isabelly E. O. Araujo</li>
               <li>Karen Aiko H. Silva</li>
               <li>Maria E. L. dos Santos</li>
+              <li>Ingrid de Sousa Nogueira</li>
             </ul>
           </div>
 
