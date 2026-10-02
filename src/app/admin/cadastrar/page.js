@@ -30,14 +30,16 @@ export default function PainelCadastro() {
       )}
 
       {/* Formulário conectado à Server Action */}
-      <form action={async (formData) => {
-        try {
-          setMensagemErro(null);
-          await cadastrarEspecie(formData);
-        } catch (error) {
-          unstable_rethrow(error);
-          setMensagemErro(error.message);
-        }
+      <form 
+        action={async (formData) => {
+          try {
+            setMensagemErro(null);
+            await cadastrarEspecie(formData);
+          } catch (error) {
+            unstable_rethrow(error);
+            setMensagemErro(error.message);
+          }
+        
       }} className="space-y-8">
         
         {/* Seção 1: Identificação Básica */}
@@ -133,8 +135,8 @@ export default function PainelCadastro() {
             </div>
 
             <div>
-              <label htmlFor="fotoPlantaInteira" className="block text-sm font-semibold text-stone-700 mb-1">🌳 Foto da Planta</label>
-              <input type="file" id="fotoPlantaInteira" name="fotoPlantaInteira" accept="image/*,.pdf" className="w-full text-sm text-stone-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-emerald-50 file:text-emerald-700 file:font-semibold hover:file:bg-emerald-100" />
+              <label htmlFor="PlantaInteira" className="block text-sm font-semibold text-stone-700 mb-1">🌳 Foto da Planta</label>
+              <input type="file" id="PlantaInteira" name="PlantaInteira" accept="image/*,.pdf" className="w-full text-sm text-stone-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-emerald-50 file:text-emerald-700 file:font-semibold hover:file:bg-emerald-100" />
             </div>
 
             <div>

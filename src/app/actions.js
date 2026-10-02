@@ -19,12 +19,13 @@ export async function cadastrarEspecie(formData) {
 
   const slug = gerarSlug(nomePopular);
 
-  const [fotoRealUrl, carimboBotanicoUrl, aquarelaUrl, mapaimagemUrl, fichaUrl] = await Promise.all([
+  const [fotoRealUrl, carimboBotanicoUrl, aquarelaUrl, mapaimagemUrl, fichaUrl, PlantaInteiraUrl] = await Promise.all([
     enviarArquivo(formData.get('fotoReal'), slug),
     enviarArquivo(formData.get('carimboBotanico'), slug),
     enviarArquivo(formData.get('aquarela'), slug),
     enviarArquivo(formData.get('mapaimagem'), slug),
     enviarArquivo(formData.get('ficha'), slug),
+    enviarArquivo(formData.get('PlantaInteira'), slug)
   ]);
 
   const dadosParaSalvar = {
