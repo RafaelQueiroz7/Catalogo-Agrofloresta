@@ -1,5 +1,6 @@
 import { prisma } from '../../../server/db';
 import { NextResponse } from 'next/server';
+export const dynamic = 'force-dynamic';
 
 export async function GET(request) {
   // Confirma que a chamada veio do Cron da Vercel, e não de qualquer pessoa que descobrir a URL
