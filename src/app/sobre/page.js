@@ -39,6 +39,7 @@ export default function SobreProjeto() {
             <ul className="space-y-2 text-stone-700 text-sm">
               <li>Gabriela M. S. Pedreira Galletti</li>
               <li>Isabel C. D. Hipólito Carvalho</li>
+              <li>Flora L Medeiros</li>
             </ul>
           </div>
 
