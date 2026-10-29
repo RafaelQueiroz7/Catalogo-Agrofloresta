@@ -39,7 +39,6 @@ export default function SobreProjeto() {
             <ul className="space-y-2 text-stone-700 text-sm">
               <li>Gabriela M. S. Pedreira Galletti</li>
               <li>Isabel C. D. Hipólito Carvalho</li>
-              <li>Flora L Medeiros</li>
             </ul>
           </div>
 
@@ -54,6 +53,7 @@ export default function SobreProjeto() {
             <li><strong>Luigi G. Barbieri</strong> — Agroecólogo</li>
             <li><strong>Ana Clara Fonseca</strong> — Colaboradora</li>
             <li><strong>Rafael Queiroz</strong> — Graduando em Engenharia de Software (UnB)</li>
+            <li><strong>Flora L. Medeiros</strong> — Professora Colaboradora</li>
           </ul>
         </div>
 
