@@ -10,15 +10,21 @@ export async function GET(request) {
   }
 
   try {
-    // Consulta trivial — só para gerar atividade real no banco via Prisma
-    const total = await prisma.especie.count();
+    // 1. Apaga os pings antigos para não encher a tabela (opcional, mas recomendado)
+    await prisma.keepAlive.deleteMany();
+
+    // 2. Insere um novo registo com a data e hora atual (Isto conta como atividade real no Supabase!)
+    const novoPing = await prisma.keepAlive.create({
+      data: {}
+    });
+
     return NextResponse.json({
       ok: true,
-      especiesCadastradas: total,
-      timestamp: new Date().toISOString(),
+      mensagem: 'Banco acordado e log registado!',
+      timestamp: novoPing.executado,
     });
   } catch (error) {
     console.error('Erro no keep-alive:', error);
-    return NextResponse.json({ ok: false, error: 'Falha ao consultar o banco' }, { status: 500 });
+    return NextResponse.json({ ok: false, error: 'Falha ao acordar o banco' }, { status: 500 });
   }
 }

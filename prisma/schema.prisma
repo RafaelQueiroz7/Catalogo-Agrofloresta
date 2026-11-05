@@ -41,3 +41,8 @@ model Especie {
   criadoEm              DateTime @default(now())
   atualizadoEm          DateTime @updatedAt
 }
+
+model KeepAlive {
+  id        String   @id @default(uuid())
+  executado DateTime @default(now())
+}
